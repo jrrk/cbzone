@@ -157,7 +157,8 @@ int main(
   screeninit();
   updatedisplay(missilerun, lander, score, numleft, sens, False);
   xhairs(aligned);
-  gprinqcursor(position);
+  position[0] = 500;
+  position[1] = 355;
   event = gprcondeventwait(&key, position);
   joystick(position, sens, pl);
 
@@ -200,7 +201,6 @@ int main(
     }
 #endif
     gettimeofday(&tstart, 0);
-    gprinqcursor(position);
     event = gprcondeventwait(&key, position);
 
     if (event && key == 'Q') {
@@ -258,7 +258,6 @@ int main(
         else if (key == 'b') {          /* center our joystick */
           position[0] = 500;
           position[1] = 355;
-          gprsetcursorposition(position);
           joystick(position, sens, pl);
           keylast = False;
         }

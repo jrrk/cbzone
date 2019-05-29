@@ -63,7 +63,6 @@ Pixel* pixels = NULL;                 /* the actual pixel values we obtain */
 Colorname* bases = NULL;              /* names of the base colors          */
 Colorname* fcnames = NULL;            /* names of the fading colors        */
 int screen_num;
-Position_t mouse_posn;
 int wid, hei, depth;
 
 #define NUMPIXMAPS 5
@@ -629,22 +628,14 @@ void timeclock(tval)
   gettimeofday(tval, 0);
 }
 
-void gprinqcursor(posn)
-     Position_t *posn;
-{
-  *posn = mouse_posn;
-}
-
 Bool paused = False;
 Bool gprcondeventwait(key, posn)
      char* key;
      Position_t *posn;
 {
-  static unsigned long flag[16]={0};
   XEvent ev;
   char keystr;
   Bool return_val = False;
-  Bool motion = False;
 
   while (XPending(d) || paused) {
     XNextEvent(d, &ev);
@@ -653,8 +644,6 @@ Bool gprcondeventwait(key, posn)
       if (((XExposeEvent*) &ev)->count) break;
       if (!paused)
         grabpointer();
-      mouse_posn.x = ev.xexpose.x;
-      mouse_posn.y = ev.xexpose.y;
       *key = 'R';
       return_val = True;
       break;
@@ -676,7 +665,7 @@ Bool gprcondeventwait(key, posn)
           grabpointer();
           paused = False;
           break;
-        case 'i': case 'I': case ' ':
+        case 'i': case 'I':
           XIconifyWindow(d, w, screen_num);
           break;
         case 'r': case 'R':
@@ -687,49 +676,19 @@ Bool gprcondeventwait(key, posn)
           *key = 'Q';
           return_val = True;
           break;
+        case '.': posn->x = 200; posn->y = 355; return_val = True; break;
+        case 'h': posn->x = 450; return_val = True; break;
+        case 'j': posn->y = 155; return_val = True; break;
+        case 'k': posn->y = 655; return_val = True; break;
+        case 'l': posn->x = 800; return_val = True; break;
+        case ' ': *key = 'a'; return_val = True; break;
         }
-      if (return_val) {
-        mouse_posn.x = ev.xkey.x;
-        mouse_posn.y = ev.xkey.y;
-      }
-      break;
-    case MotionNotify:
-      motion = True;
-      mouse_posn.x = ev.xmotion.x;
-      mouse_posn.y = ev.xmotion.y;
-      break;
-    case ButtonPress:
-      mouse_posn.x = ev.xbutton.x;
-      mouse_posn.y = ev.xbutton.y;
-      *key = ev.xbutton.button + 'a' - 1;
-      flag[ev.xbutton.button]=1;
-      return_val = True;
-      break;
-    case ButtonRelease:
-      mouse_posn.x = ev.xbutton.x;
-      mouse_posn.y = ev.xbutton.y;
-      *key = ev.xbutton.button + 'A' - 1;
-      flag[ev.xbutton.button]=0;
-      return_val = True;
       break;
     }
     if (return_val)
       break;
   }
-  if(flag[1]&&flag[3]) {
-    *key = 'Q';
-    return_val = True;
-  }
-  if (!paused) {
-    *posn = mouse_posn;
-  }
   return return_val;
-}
-
-void gprsetcursorposition(posn)
-     Position_t *posn;
-{
-  XWarpPointer (d, None, w, 0, 0, 0, 0, posn->x, posn->y);
 }
 
 Font gprloadfontfile(name)

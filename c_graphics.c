@@ -130,7 +130,6 @@ void staticscreen()
   gprsettextfont(generalfont);
   pt[0] = 500;
   pt[1] = 355;
-  gprsetcursorposition(pt);
   gprsetclippingactive(True);
 }
 
@@ -189,7 +188,7 @@ void updatedisplay (missile, lander, score, numleft, sens, reset)
   }
   gprsetclippingactive(True);
 }
-
+
 void joystick (position, sens, pl)
      int* position;
      Genericp pl;
