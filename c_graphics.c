@@ -33,7 +33,7 @@ void message(number, bell)
   if (bell)
     tonetime();
 }
-
+
 void screeninit()
 {
   controlfont = gprloadfontfile(CONTROLFONT);
@@ -41,7 +41,7 @@ void screeninit()
   generalfont = gprloadfontfile(GENERALFONT);
   staticscreen();
 }
-
+
 void staticscreen()
 {
   static int window[2][2] = {70, 75, 860, 350};
@@ -133,7 +133,7 @@ void staticscreen()
   gprsetcursorposition(pt);
   gprsetclippingactive(True);
 }
-
+
 void updatedisplay (missile, lander, score, numleft, sens, reset)
      Bool missile, lander, sens, reset;
      LONG score;  // Eric Fogelin made this LONG from int
@@ -189,7 +189,7 @@ void updatedisplay (missile, lander, score, numleft, sens, reset)
   }
   gprsetclippingactive(True);
 }
-
+
 void joystick (position, sens, pl)
      int* position;
      Genericp pl;
@@ -257,7 +257,7 @@ void joystick (position, sens, pl)
   draw = !draw;
   pl->rotate = -pl->rotate;
 }
-
+
 /*
  * scanner
  *
@@ -321,7 +321,7 @@ void scanner(o)
     multiline(dot, ind);                /* draw enemies, if necessary  */
   gprsetclippingactive(True);
 }
-
+
 void xhairs (aligned)
      Bool aligned;
 {
@@ -356,7 +356,7 @@ void xhairs (aligned)
   }
   draw = !draw;
 }
-
+
 void drawhorizon(azm)
      float azm;
 {
@@ -491,7 +491,7 @@ void drawhorizon(azm)
   else
     moon = False;
 }
-
+
 void drawcracks()
 {
   static short pt[] = {190, 75, 270, 175, 270, 175, 230, 265, 240, 243,
@@ -506,7 +506,7 @@ void drawcracks()
   gprsetdrawvalue(opt->cpi[COLOR_CRACKS]);
   multiline(pt, 19);                    /* draw cracks */
 }
-
+
 void clearscreen ()
 {
   static int destorigin[] = {70, 75};

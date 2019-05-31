@@ -9,7 +9,7 @@
  * than slow down the draw routines, we just have a similiar, but
  * different, set of equations here.
  */
-
+ 
 /*
  * the standard routine for exploding pieces, which will not take
  * into account rotating objects.
@@ -51,7 +51,7 @@ void calcpointsV(dc, method, index, g, pl)
     new->y = 260 - prz / pry * 450;
   }
 }
-
+ 
 /*
  * the routine that is used for drawing the exploding
  * copter blade.
@@ -105,7 +105,7 @@ void calcpointsVI(dc, method, index, g, pl)
     new->y = 260 - prz / pry * 450;
   }
 }
-
+ 
 void explodeobject(g, pl)
      Genericp g, pl;
 {
@@ -401,7 +401,7 @@ void explodeobject(g, pl)
     dc->stp = dc->stp*v[2] + temp*v[3];
   }
 }
-
+ 
 void explodesalvo (g, pl)
      Genericp g;
      Genericp pl;

@@ -30,7 +30,7 @@
  * If you change these, change the defaults specified in cbzone.help
  */
 #define MMISSILES 1
-#define MTANKS 2
+#define MTANKS 1
 #define MLANDERS 4
 #define MBLOCKS 8
 #define DELAY 5

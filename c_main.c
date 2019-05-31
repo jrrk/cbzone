@@ -44,7 +44,7 @@
 
 Option option;
 Optionp opt = &option;
-
+ 
 /*
  * Just initialize the array prior to starting play.  Associate
  * the salvos with the correct objects.  Set the cosines of some
@@ -84,7 +84,7 @@ void initarray(o)
     s++;
   }
 }
-
+ 
 /*
  * The main routine for cbzone.  Probably more complicated than it
  * need be...but it takes care of all the interobject dependencies.

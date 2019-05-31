@@ -25,3 +25,4 @@ typedef long LONG;
 #include "c_struct.h"
 #include "c_extern.h"
 
+enum {XOFF=50,YOFF=50,XM=3,XD=4,YM=3,YD=4};

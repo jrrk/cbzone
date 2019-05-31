@@ -44,7 +44,7 @@
 extern int errno;
 int x, y, ydelta;
 
-
+ 
 void xprintf(s, output)                 /* print to the X screen */
      char* s;
      Bool output;
@@ -69,7 +69,7 @@ void printandwait(s, c)                 /* print a string and then */
   xprintf(s, True);
   waitforkey(c);
 }
-
+ 
 LONG scores(score)
      LONG score;
 {

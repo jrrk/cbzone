@@ -5,7 +5,7 @@
  *
  * This is an attempt at cleaning up the drawing routines.
  */
-
+ 
 /*
  * this routine is for points which cannot change their bearing and have
  * no moving parts; i.e., blocks.
@@ -37,7 +37,7 @@ void calcpointsI(dc, method, index, g, pl)
       new->y = 260 - prz / pry * 450;
     }
 }
-
+ 
 /*
  * this routine is for points which may change their bearing, but do not
  * have moving parts.
@@ -76,7 +76,7 @@ void calcpointsII(dc, method, index, g, pl)
     new->y = 260 - prz / pry * 450;
   }
 }
-
+ 
 /*
  * this routine is for points which do not change their bearing,
  * but have moving parts which rotate around the center of the
@@ -116,7 +116,7 @@ void calcpointsIII(dc, method, index, g, pl)
     new->y = 260 - prz / pry * 450;
   }
 }
-
+ 
 /*
  * this routine is for points which do change their bearing,
  * and have moving parts which do not rotate around the center of the
@@ -161,7 +161,7 @@ void calcpointsIV(dc, method, index, g, pl)
     new->y = 260 - prz / pry * 450;
   }
 }
-
+ 
 /*
  * draw plines and mlines
  *
@@ -182,7 +182,7 @@ void displayobject(dc)
     point += *i;
   }
 }
-
+ 
 void drawobject(g, pl)
      Genericp g, pl;
 {

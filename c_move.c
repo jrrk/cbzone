@@ -181,7 +181,7 @@ void placeobjects(o, missilerun, score)
       g->z = 0.0;
     }
 }
-
+ 
 void movesuper(g, pl)
      Genericp g;
      Genericp pl;
@@ -336,7 +336,7 @@ void movesuper(g, pl)
     }
   }
 }
-
+ 
 void movemissile(g, pl, first)
      Genericp g;
      Genericp pl;
@@ -410,7 +410,7 @@ void movemissile(g, pl, first)
     }
   }
 }
-
+ 
 void movecopter(g, pl)
      Genericp g;
      Genericp pl;
@@ -551,7 +551,7 @@ void movecopter(g, pl)
     }
   }
 }
-
+ 
 void movetank(g, pl)
      Genericp g;
      Genericp pl;
@@ -707,7 +707,7 @@ void movetank(g, pl)
     }
   }
 }
-
+ 
 void movelander(g, pl)
      Genericp g;
      Genericp pl;

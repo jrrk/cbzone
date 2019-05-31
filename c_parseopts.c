@@ -13,7 +13,7 @@
  * since the execl will block on tty output.  To allow this we create
  * yet another flag that specifies that motd is not to be read.
  */
-
+ 
 int pager(file)
      char* file;
 {
@@ -49,7 +49,7 @@ int pager(file)
   }
   return 0;
 }
-
+ 
 int getoptionint(s)
      char *s;
 {
@@ -63,7 +63,7 @@ int getoptionint(s)
   }
   return(num);
 }
-
+ 
 /*
  * the following routine may be called in one of two ways...
  *  either w/ the display set or without...if without, then we

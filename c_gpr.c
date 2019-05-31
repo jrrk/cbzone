@@ -566,42 +566,58 @@ void printstring(x, y, string, nchars)
      char* string;
      int nchars;
 {
-  XDrawImageString (d, w, TextGC, x, y, string, nchars);
+  XDrawImageString (d, w, TextGC, (x-XOFF)*XM/XD, (y-YOFF)*XM/XD, string, nchars);
 }
 
 void polyline(points, number)
      XPoint *points;
      int number;
 {
-  XDrawLines(d, w, DrawGC, points, number, CoordModeOrigin);
+  int i;
+  XPoint p[number]; // This is a GCC extension, use malloc otherwise
+  for (i = 0; i < number; i++)
+    {
+      p[i].x = (points[i].x-XOFF)*XM/XD;
+      p[i].y = (points[i].y-YOFF)*XM/XD;
+    }
+  XDrawLines(d, w, DrawGC, p, number, CoordModeOrigin);
 }
 
 void multiline(segments, number)
      XSegment *segments;
      int number;
 {
-  XDrawSegments (d, w, DrawGC, segments, number);
+  int i;
+  XSegment seg[number]; // This is a GCC extension, use malloc otherwise
+  for (i = 0; i < number; i++)
+    {
+      seg[i].x1 = (segments[i].x1-XOFF)*XM/XD;
+      seg[i].x2 = (segments[i].x2-XOFF)*XM/XD;
+      seg[i].y1 = (segments[i].y1-YOFF)*XM/XD;
+      seg[i].y2 = (segments[i].y2-YOFF)*XM/XD;
+    }
+  XDrawSegments (d, w, DrawGC, seg, number);
 }
 
 void drawrectangle(x, y, width, height)
      int x, y, width, height;
 {
-  XDrawRectangle (d, w, DrawGC, x, y, width, height);
+  XDrawRectangle (d, w, DrawGC, (x-XOFF)*XM/XD, (y-YOFF)*YM/YD, width*XM/XD, height*YM/YD);
 }
 
 void bitblt(window)
      Window_t *window;
 {
-  XFillRectangle(d, w, BitBltGC, window->base.x, window->base.y,
-                 window->size.x, window->size.y);
+  XFillRectangle(d, w, BitBltGC, (window->base.x-XOFF)*XM/XD, (window->base.y-YOFF)*YM/YD,
+                 window->size.x*XM/XD, window->size.y*YM/YD);
 }
 
 void clearrectangle(window, dsto)
      Window_t *window;
      Position_t *dsto;
 {
-  XFillRectangle(d,w,EraseGC,dsto->x, dsto->y,
-                 window->size.x, window->size.y);
+  XFillRectangle(d,w,EraseGC,(dsto->x-XOFF)*XM/XD, (dsto->y-YOFF)*YM/YD,
+                 window->size.x*XM/XD, window->size.y*YM/YD);
 }
 
 void gprsetclippingactive(flag)
@@ -729,7 +745,7 @@ Bool gprcondeventwait(key, posn)
 void gprsetcursorposition(posn)
      Position_t *posn;
 {
-  XWarpPointer (d, None, w, 0, 0, 0, 0, posn->x, posn->y);
+  XWarpPointer (d, None, w, 0, 0, 0, 0, (posn->x-XOFF)*XM/XD, (posn->y-YOFF)*YM/YD);
 }
 
 Font gprloadfontfile(name)
@@ -766,8 +782,8 @@ void gprcircle(center, radius)
      int radius;
 {
   XDrawArc (d, w, DrawGC,
-            center->x - radius, center->y - radius,
-            radius+radius, radius+radius, 0, 360*64);
+            (center->x - XOFF - radius)*XM/XD, (center->y - YOFF - radius)*YM/YD,
+            (radius+radius)*XM/XD, (radius+radius)*YM/YD, 0, 360*64);
 }
 
 void gprcirclefilled(center, radius)
@@ -775,17 +791,17 @@ void gprcirclefilled(center, radius)
      int radius;
 {
   XFillArc (d, w, DrawGC,
-            center->x - radius, center->y - radius,
-            radius+radius, radius+radius, 0, 360*64);
+            (center->x-XOFF - radius)*XM/XD, (center->y-YOFF - radius)*YM/YD,
+            (radius+radius)*XM/XD, (radius+radius)*YM/YD, 0, 360*64);
 }
 
 void gprsetclipwindow(window)
      Window_t *window;
 {
-  clipr.x = window->base.x;
-  clipr.y = window->base.y;
-  clipr.width = window->size.x;
-  clipr.height =  window->size.y;
+  clipr.x = (window->base.x-XOFF)*XM/XD;
+  clipr.y = (window->base.y-YOFF)*XM/XD;
+  clipr.width = window->size.x*XM/XD;
+  clipr.height =  window->size.y*YM/YD;
 }
 
 void clearentirescreen()
@@ -829,14 +845,15 @@ void putpixmap(i, p)
      int i;
      int* p;
 {
+  
   XCopyArea(d, bmaps[i].p, w, DrawGC, 0, 0,
-            bmaps[i].width, bmaps[i].height, p[0], p[1]);
+            bmaps[i].width, bmaps[i].height, (p[0]-XOFF)*XM/XD, (p[1]-YOFF)*YM/YD);
 }
 
 void removepixmap(i, p)
      int i;
      int* p;
 {
-  XFillRectangle(d, w, EraseGC, p[0], p[1],
+  XFillRectangle(d, w, EraseGC, (p[0]-XOFF)*XM/XD, (p[1]-YOFF)*YM/YD,
                  bmaps[i].width, bmaps[i].height);
 }
