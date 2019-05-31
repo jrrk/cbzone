@@ -21,7 +21,7 @@
  * Give the complete path.  This program will be used to read
  * the message of the day and the helpfile.
  */
-#define PAGER "/usr/ucb/more"
+#define PAGER "/bin/more"
 
 /*
  * these are the defaults...the conditions under which the game is

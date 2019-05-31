@@ -737,7 +737,8 @@ Bool gprcondeventwait(key, posn)
     return_val = True;
   }
   if (!paused) {
-    *posn = mouse_posn;
+    posn->x = mouse_posn.x*XD/XM + XOFF;
+    posn->y = mouse_posn.y*YD/YM + YOFF;
   }
   return return_val;
 }
