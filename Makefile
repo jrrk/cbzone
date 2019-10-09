@@ -1,5 +1,6 @@
 H = c_colors.h c_config.h c_defs.h c_extern.h c_includ.h c_struct.h generic.h patchlev.h unix2nt.h
-O = c_draw.c c_explode.c c_gpr.c c_graphics.c c_main.c c_move.c c_parseopts.c c_scores.c
+O = c_draw.o c_explode.o c_gpr.o c_graphics.o c_main.o c_move.o c_parseopts.o c_scores.o
+CFLAGS = -DTANKDIR=\"/var/tmp/\" -O3
 
 cbzone: $O $H
-	gcc -o $@ -DTANKDIR=\"/var/tmp/\" $O -O3 -lXt -lXext -lX11 -lm
+	gcc -o $@ $O -lXt -lXext -lX11 -lm
