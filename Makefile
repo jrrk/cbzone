@@ -3,4 +3,4 @@ O = c_draw.o c_explode.o c_gpr.o c_graphics.o c_main.o c_move.o c_parseopts.o c_
 CFLAGS = -DTANKDIR=\"/var/tmp/\" -O3
 
 cbzone: $O $H
-	gcc -o $@ $O -lXt -lXext -lX11 -lm
+	$(CC) -o $@ $O -lXt -lXext -lX11 -lm
