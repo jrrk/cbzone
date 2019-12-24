@@ -25,4 +25,6 @@ typedef long LONG;
 #include "c_struct.h"
 #include "c_extern.h"
 
+#define TANKDIR "/var/tmp/"
+
 enum {XOFF=50,YOFF=50,XM=7,XD=10,YM=7,YD=10};
